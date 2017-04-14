@@ -1,0 +1,16 @@
+/*
+DATA TABLES
+
++++ FEEDS +++
+
+ feedid (AUTO) | url | feedurl | iconurl | description
+---------------|-----|---------|---------|-------------
+
++++ FEEDDATA +++
+ articleid (AUTO) | cdate (creation) | feedid | articleurl | title | preview (max 400char) | fullarticle
+------------------|------------------|--------|------------|-------|-----------------------|-------------
+
++++ FEEDUSERABOS +++
+ userid (AUTO) | feedid
+---------------|--------
+*/
