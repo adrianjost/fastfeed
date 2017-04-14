@@ -9,11 +9,12 @@
 	<?php /* <link type="text/css" rel="stylesheet" href="inc/css/normalize.css"  media="screen,projection"/>
     <link type="text/css" rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
     */ ?>
+    <script async src="inc/js/script.js"></script>
     <script type="text/javascript"> 
 var cv = <?php echo filemtime("inc/css/styles.css"); ?>;
 var cu = "inc/css/styles.css"+"?v="+cv;
-var jv = <?php echo filemtime("inc/js/script.js"); ?>;
-var ju = "inc/js/script.js"+"?v="+jv;
+//var jv = <?php echo filemtime("inc/js/script.js"); ?>;
+//var ju = "inc/js/script.js"+"?v="+jv;
 /*========== AJAX-REQUEST ==========*/
 function EXT(u,c){var n=new XMLHttpRequest;n.open("GET",u,!0),n.onreadystatechange=function(){4==n.readyState&&"200"==n.status?c(n.responseText):4==n.readyState&&c(!1)},n.send(null)}
 function fCSS(){
@@ -42,7 +43,7 @@ function ct(){
     document.getElementsByTagName("head")[0].appendChild(ss);
 }
 fCSS();
-
+/*
 function fJS(){
     if (typeof(Storage) !== "undefined") {
         if(localStorage.getItem("JSVersion")==jv&&(localStorage.getItem("MainJS")!=null)){
@@ -71,8 +72,8 @@ function jt(a,t){
     else{ss.src = t;}
     document.getElementsByTagName("head")[0].appendChild(ss);
 }
-fJS();
- </script>
+fJS();*/
+</script>
 <span class="html1-symbol"><noscript><</span><span class="html1-reservedword">link</span> <span class="html1-identifier">href</span><span class="html1-symbol">="/wp/wp-content/themes/CleanIT/style.css</span><span class="html1-value">"</span> <span class="html1-identifier">rel</span><span class="html1-symbol">=</span><span class="html1-value">"stylesheet"</span><span class="html1-symbol">></noscript></span>
 
 	<!--Let browser know website is optimized for mobile-->
