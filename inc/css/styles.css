@@ -224,7 +224,13 @@ footer .infos a {
     header .brand-logo, header li{
         padding:.75rem;
     }
-    ..headline, .headline h2,.single-card h2{
+    .headline{
+        padding:0;
+    }
+    .headline .favicon{
+        margin: 0 8px 0 0;
+    }
+    .headline, .headline h2,.single-card h2{
         font-size: 1.2rem;
     }
     #cards .content img{
