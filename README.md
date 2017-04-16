@@ -2,8 +2,8 @@
 A beautiful fast RSS-Reader with modern Webtechnology to improve mobile use on realy slow networks
 
 ## How to name your branch
-Take the id of the issue + " - " + title of the issue </br>
-e.g. "1 - database is missing" for https://github.com/adrianjost/fastfeed/issues/1
+#(id of the issue) + title of the issue </br>
+e.g. "#1 database is missing" for https://github.com/adrianjost/fastfeed/issues/1
 
 
 ## Commiting
