@@ -47,4 +47,23 @@ function save_feed_item($data){
     db_query($sql);
 }
 
+function get_new_feeds($lastid){
+    global $db_prefix;
+    $sql = "SELECT ".$db_prefix."FEEDDATA.*,".$db_prefix."FEEDS.iconurl  FROM ".$db_prefix."FEEDDATA, ".$db_prefix."FEEDS WHERE ".$db_prefix."FEEDDATA.articleid > ".$lastid." AND ".$db_prefix."FEEDDATA.feedid = ".$db_prefix."FEEDS.feedid;";
+    $result = db_query($sql);
+    $return = [];
+    while ($row = mysqli_fetch_assoc($result)){
+        $return[] = [
+        "id"        => $row["articleid"],
+        "cdate"     => $row["cdate"],
+        "content"   => [
+            "url"       => $row["url"],
+            "iconurl"   => $row["iconurl"],
+            "title"     => $row["title"],
+            "preview"   => $row["preview"]
+        ]];
+    }
+    return $return;
+}
+
 ?>
