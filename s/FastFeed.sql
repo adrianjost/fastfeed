@@ -61,6 +61,7 @@ CREATE TABLE IF NOT EXISTS `FF1_FEEDS` (
   `url` varchar(2000) NOT NULL COMMENT 'Website URL',
   `feedurl` varchar(2000) NOT NULL COMMENT 'URL to RSS-Feed',
   `iconurl` varchar(2000) NOT NULL COMMENT 'URL to Favicon of Website',
+  `title` varchar(64) NOT NULL COMMENT 'Name of Website',
   `description` text NOT NULL COMMENT 'Short description of Website',
   PRIMARY KEY (`feedid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;

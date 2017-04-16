@@ -4,9 +4,9 @@ Engine=MyISAM
 
 +++ FEEDS +++
 
- feedid   | url           | feedurl       | iconurl       | description
-----------|---------------|---------------|---------------|-------------
--int(5)AI-|-varchar(2000)-|-varchar(2000)-|-varchar(2000)-|-text--------
+ feedid   | url           | feedurl       | iconurl       | title       | description
+----------|---------------|---------------|---------------|-------------|-------------
+-int(5)AI-|-varchar(2000)-|-varchar(2000)-|-varchar(2000)-|-varchar(64)-|-text--------
 
 +++ FEEDDATA +++
  articleid  | cdate   | feedid | url           | title        | preview | fullarticle
