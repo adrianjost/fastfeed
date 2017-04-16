@@ -6,12 +6,12 @@ Engine=MyISAM
 
  feedid   | url           | feedurl       | iconurl       | title       | description
 ----------|---------------|---------------|---------------|-------------|-------------
--int(5)AI-|-varchar(2000)-|-varchar(2000)-|-varchar(2000)-|-varchar(64)-|-text--------
+-int(5)AI-|-varchar(1000)-|-varchar(1000)-|-varchar(1000)-|-varchar(64)-|-text--------
 
 +++ FEEDDATA +++
  articleid  | cdate   | feedid | url           | title        | preview | fullarticle
 ------------|---------|--------|---------------|--------------|---------|-------------
- -int(10)AI-|-int(10)-|-int(5)-|-varchar(2000)-|-varchar(200)-|-text----|-text--------
+ -int(10)AI-|-int(10)-|-int(5)-|-varchar(1000)-|-varchar(200)-|-text----|-text--------
 
 +++ FEEDUSERS +++
  userid    | lastuse (UNIX TIMESTAMP)

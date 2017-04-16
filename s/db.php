@@ -40,12 +40,11 @@ function get_feed_list(){
     return $return;
 }
 
-function save_feed_item($url,$data){
+function save_feed_item($data){
     /* Artikel aus Feed Speichern */
     global $db_prefix;
     $sql = "INSERT INTO ".$db_prefix."FEEDDATA (`cdate`, `feedid`, `url`, `title`, `preview`) VALUES (".time().", ".$data["feedid"].", '".substr($data["url"],0,2000)."', '".substr($data["title"],0,200)."', '".$data["preview"]."');";
-    echo $sql."</br>";
-    var_dump(db_query($sql));
+    db_query($sql);
 }
 
 ?>

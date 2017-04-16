@@ -43,11 +43,12 @@ CREATE TABLE IF NOT EXISTS `FF1_FEEDDATA` (
   `articleid` int(10) NOT NULL AUTO_INCREMENT COMMENT 'unique ID',
   `cdate` int(10) NOT NULL COMMENT 'UNIX Timestamp',
   `feedid` int(5) NOT NULL COMMENT 'related feedID from FEEDS',
-  `url` varchar(2000) NOT NULL COMMENT 'URL to Article',
+  `url` varchar(1000) NOT NULL COMMENT 'URL to Article',
   `title` varchar(200) NOT NULL COMMENT 'Title of Article',
   `preview` text NOT NULL COMMENT 'Preview of Article',
   `fullarticle` text COMMENT 'Full Article',
-  PRIMARY KEY (`articleid`)
+  UNIQUE KEY (`articleid`),
+  PRIMARY KEY (`url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
 -- --------------------------------------------------------
@@ -58,9 +59,9 @@ CREATE TABLE IF NOT EXISTS `FF1_FEEDDATA` (
 
 CREATE TABLE IF NOT EXISTS `FF1_FEEDS` (
   `feedid` int(5) NOT NULL AUTO_INCREMENT,
-  `url` varchar(2000) NOT NULL COMMENT 'Website URL',
-  `feedurl` varchar(2000) NOT NULL COMMENT 'URL to RSS-Feed',
-  `iconurl` varchar(2000) NOT NULL COMMENT 'URL to Favicon of Website',
+  `url` varchar(1000) NOT NULL COMMENT 'Website URL',
+  `feedurl` varchar(1000) NOT NULL COMMENT 'URL to RSS-Feed',
+  `iconurl` varchar(1000) NOT NULL COMMENT 'URL to Favicon of Website',
   `title` varchar(64) NOT NULL COMMENT 'Name of Website',
   `description` text NOT NULL COMMENT 'Short description of Website',
   PRIMARY KEY (`feedid`)

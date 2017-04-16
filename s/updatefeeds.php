@@ -13,13 +13,13 @@ function update_feeds(){
     foreach ($feeds as $feed) {
         $lastknownitemurl = get_last_feeditem_url($feed["feedid"]);
         if(!$lastknownitemurl){$lastknownitemurl = "";}
-        $items = get_feed_and_parse($feed["feedurl"], $lastknownitemurl);
+        $items = get_feed_and_parse($feed["feedurl"]);
         foreach($items as $item){
             $item["feedid"] = $feed["feedid"];
-            save_feed_item($url, $item);
+            save_feed_item($item);
 }}}update_feeds();
 
-function get_feed_and_parse($url,$lastknownitemurl){
+function get_feed_and_parse($url){
     //this should work as it is but is untested
     $xml=($url);
     $xmlDoc = new DOMDocument();
@@ -38,10 +38,6 @@ function get_feed_and_parse($url,$lastknownitemurl){
     //for ($i=0; $i<=2; $i++) {
     foreach ($items as $item) {
         $item_link  = $item->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
-        if($lastknownitemurl == $item_link){
-            //no more new items
-            break;
-        }
         $item_title = $item->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
         $item_desc  = $item->getElementsByTagName('description')->item(0)->childNodes->item(0)->nodeValue;
         // may this isn't the best data strucure for handling data between functions -> you can change it
