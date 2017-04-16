@@ -17,7 +17,7 @@ function update_feeds(){
         foreach($items as $item){
             $item["feedid"] = $feed["feedid"];
             save_feed_item($item);
-}}}update_feeds();
+}}}
 
 function get_feed_and_parse($url){
     //this should work as it is but is untested
@@ -49,4 +49,6 @@ function get_feed_and_parse($url){
     }
     return $entrys;
 }
+
+update_feeds();
 ?>
