@@ -87,7 +87,6 @@ function jt(a,t){
 }
 fJS();*/
 </script>
-<span class="html1-symbol"><noscript><</span><span class="html1-reservedword">link</span> <span class="html1-identifier">href</span><span class="html1-symbol">="/wp/wp-content/themes/CleanIT/style.css</span><span class="html1-value">"</span> <span class="html1-identifier">rel</span><span class="html1-symbol">=</span><span class="html1-value">"stylesheet"</span><span class="html1-symbol">></noscript></span>
 
 	<!--Let browser know website is optimized for mobile-->
 	<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
