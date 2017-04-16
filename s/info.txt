@@ -1,16 +1,30 @@
 /*
-DATA TABLES
+DATA TABLES (Prefix: "FF1_")
+Engine=MyISAM
 
 +++ FEEDS +++
 
- feedid (AUTO) | url | feedurl | iconurl | description
----------------|-----|---------|---------|-------------
+ feedid   | url           | feedurl       | iconurl       | title       | description
+----------|---------------|---------------|---------------|-------------|-------------
+-int(5)AI-|-varchar(1000)-|-varchar(1000)-|-varchar(1000)-|-varchar(64)-|-text--------
 
 +++ FEEDDATA +++
- articleid (AUTO) | cdate (creation) | feedid | articleurl | title | preview (max 400char) | fullarticle
-------------------|------------------|--------|------------|-------|-----------------------|-------------
+ articleid  | cdate   | feedid | url           | title        | preview | fullarticle
+------------|---------|--------|---------------|--------------|---------|-------------
+ -int(10)AI-|-int(10)-|-int(5)-|-varchar(1000)-|-varchar(200)-|-text----|-text--------
 
-+++ FEEDUSERABOS +++
- userid (AUTO) | feedid
----------------|--------
++++ FEEDUSERS +++
+ userid    | lastuse (UNIX TIMESTAMP)
+-----------|---------
+-int(10)AI-|-int(10)-
+
++++ FEEDABOS +++
+ aboid     | userid  | feedid
+-----------|---------|--------
+-int(10)AI-|-int(10)-|-int(5)-
+
+
+IMPORTANT: 
+   To keep the database clean, every article should be deleted after 14 days 
+   and every userid after 3 Months of no use (including abos with userid)
 */
