@@ -19,22 +19,11 @@ Main-function: get_feed()
 DATA TABLES -> info.txt
 */
 
+require("db.php");
 
-//+++ DEMOOUTPUT - JUST FOR TESTING FRONTEND +++
-$i=0;
-$out = [];
-while($i<1){
-    array_push($out, array(
-        "id"        => time(),
-        "content"   => array(
-            "url"       => "http://t3n.de/news/besten-news-apps-807908/",
-            "iconurl"   => "http://d1quwwdmdfumn6.cloudfront.net/t3n-rebrush/images/core/icon/AppIcon152.png",
-            "title"     => "10 außergewöhnliche News-Apps, um informiert zu bleiben",
-            "preview"   => "In Zeiten von Fake-News und Debatten um die vermeintliche „Lügenpresse” ist es nicht immer einfach, den Überblick zu behalten und sich selbst ein Bild zu machen. Wir zeigen zehn News-Apps, die dabei helfen sollen."
-        )
-    ));
-    $i+=1;
-}
-echo json_encode($out);
+if(!isset($_GET["last"])){exit();}
 
+echo json_encode(get_new_feeds(intval($_GET["last"])));
+
+exit();
 ?>

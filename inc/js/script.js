@@ -1,7 +1,7 @@
 /* --------------------------------------------------------
 	OPTIONS
 ---------------------------------------------------------*/
-var max_cards = 5; //100
+var max_cards = 100; //100
 
 
 /* --------------------------------------------------------
@@ -40,15 +40,15 @@ function load_main(){
 function cleanup_cards(){
     var n = news;
     //delete old articles
-    var min_time = Date.now() - (7 * 86400000);
+    var min_time = Math.round(new Date().getTime()/1000) - (7 * 86400);
     for (var i=0; i<n.length; i++) {
         var a = JSON.parse(getData("content-"+n[i]))
-        if (a["cdate"]<min_time){
+        if (parseInt(a["cdate"])<min_time){
             delData("content-"+n[i])
             n.splice(i, 1);
         }
     }
-    //delete all articles to prevent store more than max_cards 
+    //delete articles to prevent store more than max_cards 
     n.sort(function(a,b){return a-b}); //delete oldest first
     while(max_cards < n.length){
         delData("content-"+n[0])
@@ -63,7 +63,7 @@ function cleanup_cards(){
 function add_card(article){
     if(existData("content-"+article.id)){return;}
     saveData("content-"+article.id,JSON.stringify(article));
-    news.push(article.id);
+    news.push(parseInt(article.id));
     saveData("news",JSON.stringify(news));
 }
 
@@ -187,7 +187,9 @@ window.onload = function(){
     document.getElementById("about").addEventListener("click",load_about);
     document.getElementById("settings").addEventListener("click",load_settings);
     render_cards(0);
-    ajax("s/getfeedupdates.php?last="+Math.max(news)+"&uid="+userid,function(resp){
+    var last = Math.max(...news)
+    if(last==Infinity){last=0;}
+    ajax("s/getfeedupdates.php?last="+last+"&uid="+userid,function(resp){
         resp = JSON.parse(resp);
         for (i=0; i<resp.length; i++){
             add_card(resp[i]);
