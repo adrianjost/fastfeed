@@ -37,8 +37,6 @@ function minimalize($str){
     $str = trim($str);
     //remove all html tags except <br><p><a>
     $str = strip_tags($str,'<a>');
-    // encode html special chars
-    $str = htmlspecialchars($str);
     //remove images
     $str = preg_replace("/<img[^>]+\>/i", "(", $str); 
     //remove attributes from html-tags
