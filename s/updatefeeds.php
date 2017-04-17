@@ -19,6 +19,18 @@ function update_feeds(){
             save_feed_item($item);
 }}}
 
+function minimalize($str){
+    $str = trim($str)
+    //remove all html tags except <br><p><a>
+    strip_tags($str, '<br><p><a>');
+    //remove images
+    $str = preg_replace("/<img[^>]+\>/i", "(", $str); 
+    //remove attributes from html-tags
+    $str = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $str);
+    
+    return $str;
+}
+
 function get_feed_and_parse($url){
     //this should work as it is but is untested
     $xml=($url);
@@ -40,11 +52,14 @@ function get_feed_and_parse($url){
         $item_link  = $item->getElementsByTagName('link')->item(0)->childNodes->item(0)->nodeValue;
         $item_title = $item->getElementsByTagName('title')->item(0)->childNodes->item(0)->nodeValue;
         $item_desc  = $item->getElementsByTagName('description')->item(0)->childNodes->item(0)->nodeValue;
-        // may this isn't the best data strucure for handling data between functions -> you can change it
+        
+        if(strlen($item_title)<3){$item_title = "TL;DR";}
+        if(strlen($item_desc)<5){$item_desc = "no description found";}
+        
         $entrys[] = [
             "url"       => $item_link,
-            "title"     => $item_title,
-            "preview"   => $item_desc
+            "title"     => minimalize($item_title),
+            "preview"   => minimalize($item_desc)
         ];
     }
     return $entrys;

@@ -26,7 +26,7 @@ var userid = 12345;
 /* --------------------------------------------------------
 	CARDS
 ---------------------------------------------------------*/
-function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+" #"+id+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
+function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
 
 function load_main(){
     document.getElementById("cards").classList.remove("hidden");
