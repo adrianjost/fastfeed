@@ -115,6 +115,9 @@ header li:hover,
 
 .card-panel p{margin-top:0;}
 .card-panel:not(.fullarticle) p{margin:0;}
+.content:not(.fullarticle){
+    overflow-x:auto;
+}
 .content img{
     display:block;
     width:80%;
