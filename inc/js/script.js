@@ -26,11 +26,11 @@ var userid = 12345;
 /* --------------------------------------------------------
 	CARDS
 ---------------------------------------------------------*/
-function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+" #"+id+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
+function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
 
 function load_main(){
-    document.getElementById("cards").classList.remove("hidden");
     document.getElementById("aboutcard").classList.add("hidden");
+    document.getElementById("cards").classList.remove("hidden");
     document.getElementById("settingscard").classList.add("hidden");
     window.location.hash = "#"+document.getElementsByClassName("fullarticle")[0].getAttribute("id")
     //history.pushState({}, '', document.getElementsByClassName("fullarticle")[0].getAttribute("id"));
@@ -101,6 +101,7 @@ function togglecard(e,t = this){
     if(t.classList.contains('fullarticle')){
         document.getElementById("cards").classList.remove('onecard');
         t.classList.remove('fullarticle');
+        t.setAttribute("href","#"+t.getAttribute("id"));
         var s = JSON.parse(getData("content-"+t.getAttribute("id")));
         t.getElementsByClassName("content")[0].innerHTML = s["content"]["preview"];
         document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
@@ -117,6 +118,7 @@ function loadarticle(t){
     if(c["fullcontent"]){
         document.getElementById(c["id"]).getElementsByClassName("content")[0].innerHTML = c["fullcontent"];
         document.getElementById(c["id"]).classList.add('fullarticle');
+        document.getElementById(c["id"]).removeAttribute("href");
         document.getElementById("cards").classList.add('onecard');
         t.classList.remove('loading');
         lazyimg();
@@ -143,6 +145,7 @@ function loadarticle(t){
                     document.getElementById(r["id"]).getElementsByClassName("content")[0].appendChild(ifrm);
                 }
                 //add hash without specific scrolling
+                document.getElementById(c["id"]).removeAttribute("href");
                 window.location.hash = c["id"];
                 window.scrollBy(0,-70);
                 
