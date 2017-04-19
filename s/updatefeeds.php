@@ -36,7 +36,7 @@ function update_feeds(){
 function minimalize($str){
     $str = trim($str);
     //remove all html tags except <br><p><a>
-    $str = strip_tags($str,'<a>');
+    $str = strip_tags($str);
     //remove images
     $str = preg_replace("/<img[^>]+\>/i", "(", $str); 
     //remove attributes from html-tags
