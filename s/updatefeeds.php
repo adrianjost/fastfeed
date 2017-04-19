@@ -69,6 +69,7 @@ function get_feed_and_parse($url){
         
         $item_title = minimalize($item_title);
         $item_desc  = minimalize($item_desc);
+        $item_desc  = str_replace("http://","https://",$item_desc);
         if(strlen($item_title)<3){$item_title = "TL;DR";}
         if(strlen($item_desc)<5){$item_desc = "no description found";}
 
