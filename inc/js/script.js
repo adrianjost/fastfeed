@@ -190,7 +190,7 @@ window.onload = function(){
     document.getElementById("settings").addEventListener("click",load_settings);
     render_cards(0);
     var last = Math.max(...news)
-    if(last==Infinity){last=0;}
+    if(last==-Infinity){last=0;}
     ajax("s/getfeedupdates.php?last="+last+"&uid="+userid,function(resp){
         resp = JSON.parse(resp);
         for (i=0; i<resp.length; i++){
