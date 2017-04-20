@@ -29,7 +29,11 @@ require("db.php");
 
 if(!isset($_GET["last"])){exit();}
 
-echo json_encode(get_new_feeds(intval($_GET["last"])));
+$json = json_encode(get_new_feeds(intval($_GET["last"])));
+if ($json)
+    echo $json;
+else
+    echo json_last_error_msg();
 
 exit();
 ?>

@@ -27,6 +27,7 @@ var userid = 12345;
 	CARDS
 ---------------------------------------------------------*/
 function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
+function get_fullcard(content,a){return '<div class="card-panel hoverable"><div id="singleheadline" class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content">'+a+'</div></div>'}
 
 function load_main(){
     document.getElementById("aboutcard").classList.add("hidden");
@@ -78,9 +79,11 @@ function render_cards(min=0,max = max_cards){
         out += get_card(a["id"],a["content"]);
     }document.getElementById("cards").innerHTML = out;
     
+    document.getElementById("fullcard").addEventListener("click",closecard);
+    
     var cards = document.getElementById("cards").getElementsByClassName("card-panel");
 	for (var i=0; i<cards.length; i++) {
-		cards[i].addEventListener("click",togglecard);
+		cards[i].addEventListener("click",opencard);
 	}
     
     // open the article with id from hash (if it exist)
@@ -96,34 +99,32 @@ function render_cards(min=0,max = max_cards){
         load_settings();
     }
 }
-function togglecard(e,t = this){
+function closecard(e,t=this){
     e.preventDefault();
-    if(t.classList.contains('fullarticle')){
-        document.getElementById("cards").classList.remove('onecard');
-        t.classList.remove('fullarticle');
-        t.setAttribute("href","#"+t.getAttribute("id"));
-        var s = JSON.parse(getData("content-"+t.getAttribute("id")));
-        t.getElementsByClassName("content")[0].innerHTML = s["content"]["preview"];
-        document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
-        window.scrollBy(0,-70);
-        history.pushState('', document.title, window.location.pathname+window.location.search);
-    }else{
-        loadarticle(t);
-    }
+    document.getElementById("cards").classList.remove('hidden');
+    document.getElementById("fullcard").classList.add('hidden');
+    document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
+    window.scrollBy(0,-70);
+    history.pushState('', document.title, window.location.pathname+window.location.search);
+}
+function opencard(e,t = this){
+    e.preventDefault();
+    loadarticle(t);
 }
 function loadarticle(t){
     t.classList.add('loading');
     t.classList.remove('error');
     var c = JSON.parse(getData("content-"+t.getAttribute("id")))
     if(c["fullcontent"]){
-        document.getElementById(c["id"]).getElementsByClassName("content")[0].innerHTML = c["fullcontent"];
-        document.getElementById(c["id"]).classList.add('fullarticle');
-        document.getElementById(c["id"]).removeAttribute("href");
-        document.getElementById("cards").classList.add('onecard');
+        document.getElementById("fullcard").innerHTML = get_fullcard(c["content"],c["fullcontent"]);
+        //window.location.hash = c["id"];
+        history.pushState('', document.title, window.location.pathname+window.location.search+"#"+c["id"]);
+        document.getElementById("cards").classList.add('hidden');
+        document.getElementById("fullcard").classList.remove('hidden');
+        window.scrollBy(0,-9999999999);
         t.classList.remove('loading');
         lazyimg();
-        window.location.hash = c["id"];
-        window.scrollBy(0,-70);
+        
     }else{
         ajax("s/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(r){
             if(!r){
@@ -131,29 +132,27 @@ function loadarticle(t){
                 t.classList.add('error');
             }else{
                 var r = JSON.parse(r);
-                t.classList.remove('loading');
-                document.getElementById(r["id"]).classList.add('fullarticle');
-                document.getElementById("cards").classList.add('onecard');
+                var s = JSON.parse(getData("content-"+r["id"]));
                 if(r["status"]){
-                    document.getElementById(r["id"]).getElementsByClassName("content")[0].innerHTML = r["body"];
-                    lazyimg();   
-                }else{  // iFrame Fallback
+                    console.log(s);
+                    document.getElementById("fullcard").innerHTML = get_fullcard(s["content"],r["body"]);
+                    //window.location.hash = c["id"];
+                    history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
+                    document.getElementById("cards").classList.add('hidden');
+                    document.getElementById("fullcard").classList.remove('hidden');
                     t.classList.remove('loading');
-                    var ifrm = document.createElement("iframe");
-                    ifrm.src = document.getElementById(r["id"]).getAttribute("url");
-                    document.getElementById(r["id"]).getElementsByClassName("content")[0].innerHTML = "";
-                    document.getElementById(r["id"]).getElementsByClassName("content")[0].appendChild(ifrm);
-                }
-                //add hash without specific scrolling
-                document.getElementById(c["id"]).removeAttribute("href");
-                window.location.hash = c["id"];
-                window.scrollBy(0,-70);
-                
-                if(r["status"]){    //store response if valid
-                    var s = JSON.parse(getData("content-"+r["id"]));
+                    lazyimg(); 
+                    
                     s["fullcontent"] = r["body"];
                     saveData("content-"+r["id"], JSON.stringify(s));
+                }else{  // iFrame Fallback
+                    var ifrm = document.createElement("iframe");
+                    ifrm.src = document.getElementById(r["id"]).getAttribute("url");
+                    console.log(ifrm);
+                    document.getElementById("fullcard").innerHTML = get_fullcard(s,ifrm);
+                    t.classList.remove('loading');
                 }
+                window.scrollBy(0,-9999999999);
             }
         })
     }
