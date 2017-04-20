@@ -64,6 +64,7 @@ if ($result) {
 		$tidy->cleanRepair();
 		$content = $tidy->value;
 	} 
+    //$content  = str_replace("http://","https://",$content);
     $content = lazyimg($content);
 	//echo $content;
     echo json_encode([

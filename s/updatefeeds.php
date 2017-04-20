@@ -36,7 +36,7 @@ function update_feeds(){
 function minimalize($str){
     $str = trim($str);
     //remove all html tags except <br><p><a>
-    $str = strip_tags($str,'<a>');
+    $str = strip_tags($str);
     //remove images
     $str = preg_replace("/<img[^>]+\>/i", "(", $str); 
     //remove attributes from html-tags
@@ -68,10 +68,15 @@ function get_feed_and_parse($url){
         $item_pubDate  = $item->getElementsByTagName('pubDate')->item(0)->nodeValue;
         
         $item_title = minimalize($item_title);
-        $item_desc  = minimalize($item_desc);
+        
+        //$item_desc  = str_replace("http://","https://",$item_desc);
         if(strlen($item_title)<3){$item_title = "TL;DR";}
-        if(strlen($item_desc)<5){$item_desc = "no description found";}
-
+        if(strlen($item_desc)<5){
+            $item_descE  = $item->getElementsByTagName('content:encoded')->item(0)->nodeValue;
+            $item_desc  = minimalize($item_descE);
+            if(strlen($item_desc)<5){$item_desc = "no description found";}
+        }
+        
         $entrys[] = [
             "url"       => trim($item_link),
             "title"     => substr($item_title, 0, 200),
