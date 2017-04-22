@@ -27,21 +27,30 @@ function update_feeds(){
         return ($a < $b) ? -1 : 1;
     }
     usort($newfeeddata, "datesort");
-    
+
     foreach ($newfeeddata as $item) {
         unset($item["pubDate"]);
         save_feed_item($item);
 }}
 
-function minimalize($str){
-    $str = trim($str);
+function minimize($str){
     //remove all html tags except <br><p><a>
-    $str = strip_tags($str);
+        $str = strip_tags($str);
+    //remove spaces at start & end
+        $str = str_replace("&nbsp;", ' ', $str);
+        $str = trim($str);
     //remove images
-    $str = preg_replace("/<img[^>]+\>/i", "(", $str); 
+        //$str = preg_replace("/<img[^>]+\>/i", "(", $str); 
     //remove attributes from html-tags
-    $str = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $str);
+        //$str = preg_replace("/<([a-z][a-z0-9]*)[^>]*?(\/?)>/i",'<$1$2>', $str);
+    //encode html chars
+        $str = htmlentities($str);
     return $str;
+}
+
+function truncate($str, $len){
+    if(strlen($str)>$len && $len>=4){return substr($str, 0, strpos(wordwrap($str, ($len-4)), "\n"))." ...";}
+    else{return $str;}
 }
 
 function get_feed_and_parse($url){
@@ -67,22 +76,28 @@ function get_feed_and_parse($url){
         $item_desc  = $item->getElementsByTagName('description')->item(0)->nodeValue;
         $item_pubDate  = $item->getElementsByTagName('pubDate')->item(0)->nodeValue;
         
-        $item_title = minimalize($item_title);
+        $item_title = minimize($item_title);
+        $item_desc  = minimize($item_desc);
         
         //$item_desc  = str_replace("http://","https://",$item_desc);
         if(strlen($item_title)<3){$item_title = "TL;DR";}
         if(strlen($item_desc)<5){
             $item_descE  = $item->getElementsByTagName('content:encoded')->item(0)->nodeValue;
-            $item_desc  = minimalize($item_descE);
+            $item_desc  = minimize($item_descE);
             if(strlen($item_desc)<5){$item_desc = "no description found";}
         }
         
+        //truncate description
+        $item_title = truncate($item_title,200);
+        $item_desc = truncate($item_desc,500);
+        
         $entrys[] = [
-            "url"       => trim($item_link),
-            "title"     => substr($item_title, 0, 200),
-            "preview"   => substr($item_desc, 0, 500),
+            "url"       => strtok(trim($item_link),'?'),
+            "title"     => $item_title,
+            "preview"   => $item_desc,
             "pubDate"   => strtotime($item_pubDate)
         ];
+        //echo substr(($item_desc), 0, 500);
     }
     return $entrys;
 }

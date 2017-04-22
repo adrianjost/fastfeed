@@ -59,8 +59,8 @@ function get_new_feeds($lastid){
         "content"   => [
             "url"       => $row["url"],
             "iconurl"   => $row["iconurl"],
-            "title"     => $row["title"],
-            "preview"   => $row["preview"]
+            "title"     => utf8_encode($row["title"]),
+            "preview"   => strip_tags(utf8_encode(strip_tags($row["preview"])))
         ]];
     }
     return $return;
