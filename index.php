@@ -22,7 +22,20 @@
         <div class="card-panel single-card fullarticle">
             <h2 class="title">Settings</h2>
             <div class="content">
-                Insert random buttons here
+                <h3>Farben</h3>
+                <style>td:first-child{font-weight:bold;padding:.5em;}</style>
+                <table>
+                    <tr>
+                        <td>primarycolor</td>
+                        <td><input type="color" value="#00d49f" style="width:50px;" onchange="document.documentElement.style.setProperty('--primarycolor', this.value); document.getElementById('primarycolor').innerHTML=this.value;"></td>
+                        <td id="primarycolor">#00d49f</td>
+                    </tr>
+                    <tr>
+                        <td>accentcolor</td>
+                        <td><input type="color" value="#fac532" style="width:50px;" onchange="document.documentElement.style.setProperty('--accentcolor', this.value); document.getElementById('accentcolor').innerHTML=this.value;"></td>
+                        <td id="accentcolor">#fac532</td>
+                    </tr>
+                </table>
             </div>
         </div>
     </section>
