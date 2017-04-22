@@ -3,8 +3,10 @@
 <?php require("inc/html/header.php");?>
 
 <main>
-    <section class="container" id="cards"></section>
-    <section class="container hidden" id="fullcard"></section>
+    <div id="contentwrapper">
+        <section class="container" id="cards"></section>
+        <section class="container hidden" id="fullcard"></section>
+    </div>
     <section id="aboutcard" class="container hidden">
         <div class="card-panel single-card fullarticle">
             <h2 class="title">About <i>Fast</i><b>Feed</b></h2>
