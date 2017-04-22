@@ -5,7 +5,6 @@ header('Content-Type: application/json; charset=utf-8');
 
 // get latest Medialens alert 
 // (change this URL to whatever you'd like to test)
-$url = 'http://t3n.de/news/besten-news-apps-807908/';
 if(isset($_GET["url"])){
     $url = $_GET["url"];
 }else{
@@ -73,6 +72,6 @@ if ($result) {
         "title" => $readability->getTitle()->textContent, 
         "body"  => $content]);
 } else {
-	echo json_encode(["status"=>false,"id"=>$id]);
+	echo json_encode(["status"=>false,"id"=>$id,"desc"=>"can't extract content"]);
 }
 ?>

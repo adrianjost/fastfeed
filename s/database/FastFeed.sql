@@ -44,9 +44,9 @@ CREATE TABLE IF NOT EXISTS `FF1_FEEDDATA` (
   `cdate` int(10) NOT NULL COMMENT 'UNIX Timestamp',
   `feedid` int(5) NOT NULL COMMENT 'related feedID from FEEDS',
   `url` varchar(1000) NOT NULL COMMENT 'URL to Article',
-  `title` varchar(200) NOT NULL COMMENT 'Title of Article',
-  `preview` text NOT NULL COMMENT 'Preview of Article',
-  `fullarticle` text COMMENT 'Full Article',
+  `title` varchar(200) CHARACTER SET utf8 NOT NULL COMMENT 'Title of Article',
+  `preview` text CHARACTER SET utf8 NOT NULL COMMENT 'Preview of Article',
+  `fullarticle` text CHARACTER SET utf8 COMMENT 'Full Article',
   UNIQUE KEY (`articleid`),
   PRIMARY KEY (`url`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
@@ -62,8 +62,8 @@ CREATE TABLE IF NOT EXISTS `FF1_FEEDS` (
   `url` varchar(1000) NOT NULL COMMENT 'Website URL',
   `feedurl` varchar(1000) NOT NULL COMMENT 'URL to RSS-Feed',
   `iconurl` varchar(1000) NOT NULL COMMENT 'URL to Favicon of Website',
-  `title` varchar(64) NOT NULL COMMENT 'Name of Website',
-  `description` text NOT NULL COMMENT 'Short description of Website',
+  `title` varchar(64) CHARACTER SET utf8 NOT NULL COMMENT 'Name of Website',
+  `description` text CHARACTER SET utf8 NOT NULL COMMENT 'Short description of Website',
   PRIMARY KEY (`feedid`)
 ) ENGINE=MyISAM DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
 
