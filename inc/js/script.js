@@ -22,21 +22,12 @@ function lazyimg(){var imgDefer=document.getElementsByTagName('img');for(var i=0
 if(existData("news")){var news = JSON.parse(getData("news"));}else{var news = [];}
 if(existData("userid")){var userid = parseInt(getData("news"));}else{var userid = Date.now();}
 var userid = 12345;
-
+var lastid = "";
 /* --------------------------------------------------------
 	CARDS
 ---------------------------------------------------------*/
 function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
 function get_fullcard(content,a){return '<div class="card-panel hoverable"><div id="singleheadline" class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content">'+a+'</div></div>'}
-
-function load_main(){
-    document.getElementById("aboutcard").classList.add("hidden");
-    document.getElementById("cards").classList.remove("hidden");
-    document.getElementById("settingscard").classList.add("hidden");
-    window.location.hash = "#"+document.getElementsByClassName("fullarticle")[0].getAttribute("id")
-    //history.pushState({}, '', document.getElementsByClassName("fullarticle")[0].getAttribute("id"));
-    //document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
-}
 
 function cleanup_cards(){
     var n = news;
@@ -58,7 +49,6 @@ function cleanup_cards(){
     //save new newslist
     news = n;
     saveData("news",JSON.stringify(news));
-    render_cards(0,max_cards);
 }
 
 function add_card(article){
@@ -99,8 +89,9 @@ function render_cards(min=0,max = max_cards){
         load_settings();
     }
 }
-function closecard(e,t=this){
-    e.preventDefault();
+function closecard(e){
+    if(e){e.preventDefault();}
+    lastid = "";
     document.getElementById("cards").classList.remove('hidden');
     document.getElementById("fullcard").classList.add('hidden');
     document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
@@ -108,7 +99,7 @@ function closecard(e,t=this){
     history.pushState('', document.title, window.location.pathname+window.location.search);
 }
 function opencard(e,t = this){
-    e.preventDefault();
+    if(e){e.preventDefault();}
     loadarticle(t);
 }
 function loadarticle(t){
@@ -118,6 +109,7 @@ function loadarticle(t){
     if(c["fullcontent"]){
         document.getElementById("fullcard").innerHTML = get_fullcard(c["content"],c["fullcontent"]);
         //window.location.hash = c["id"];
+        lastid = c["id"];
         history.pushState('', document.title, window.location.pathname+window.location.search+"#"+c["id"]);
         document.getElementById("cards").classList.add('hidden');
         document.getElementById("fullcard").classList.remove('hidden');
@@ -152,6 +144,7 @@ function loadarticle(t){
                     document.getElementById("fullcard").innerHTML = get_fullcard(s,ifrm);
                     t.classList.remove('loading');
                 }
+                lastid = r["id"];
                 window.scrollBy(0,-9999999999);
             }
         })
@@ -162,7 +155,7 @@ function loadarticle(t){
 ---------------------------------------------------------*/
 function load_settings(e){
     if(e){e.preventDefault();}
-    document.getElementById("cards").classList.add("hidden");
+    document.getElementById("contentwrapper").classList.add("hidden");
     document.getElementById("aboutcard").classList.add("hidden");
     document.getElementById("settingscard").classList.remove("hidden");
     window.location.hash = "settings";
@@ -173,18 +166,33 @@ function load_settings(e){
 ---------------------------------------------------------*/
 function load_about(e){
     if(e){e.preventDefault();}
-    document.getElementById("cards").classList.add("hidden");
+    document.getElementById("contentwrapper").classList.add("hidden");
     document.getElementById("settingscard").classList.add("hidden");
     document.getElementById("aboutcard").classList.remove("hidden");
     window.location.hash = "about";
     window.scrollBy(0,-70);
 }
 
-
 /* --------------------------------------------------------
 	MAIN
 ---------------------------------------------------------*/
+function load_main(e){
+    if(e){e.preventDefault();}
+    document.getElementById("aboutcard").classList.add("hidden");
+    document.getElementById("contentwrapper").classList.remove("hidden");
+    document.getElementById("settingscard").classList.add("hidden");
+    console.log("loadmain");
+     if(window.location.hash.substr(1)&&window.location.hash!="#about"&&window.location.hash!="#settings"){
+        closecard(e);
+    }else{
+        window.location.hash = "#"+lastid;
+    }
+    //history.pushState({}, '', document.getElementsByClassName("fullarticle")[0].getAttribute("id"));
+    //document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
+}
+
 window.onload = function(){
+    //initialize
     document.getElementById("maintoggle").addEventListener("click",load_main);
     document.getElementById("about").addEventListener("click",load_about);
     document.getElementById("settings").addEventListener("click",load_settings);
