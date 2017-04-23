@@ -90,7 +90,10 @@ function render_cards(min=0,max = max_cards){
     }
 }
 function closecard(e){
-    if(e){e.preventDefault();}
+    if(e){
+        if(e["target"].hasAttribute('href')){console.log("LINK");return;}
+        else{e.preventDefault();}
+    }
     lastid = "";
     document.getElementById("cards").classList.remove('hidden');
     document.getElementById("fullcard").classList.add('hidden');
