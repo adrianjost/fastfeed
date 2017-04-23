@@ -1,6 +1,7 @@
 :root {
-  --primarycolor: #00d9a3;
-  --accentcolor: #ff2693;
+  --primarycolor: #00d49f;
+  --accentcolor: #fac532;
+  --lightaccentcolor: #ff9800;
   --errorcolor: #ff0040;
 }
 
@@ -18,6 +19,7 @@ a{
     color: var(--accentcolor);
     text-decoration:none;
 }
+#fullcard a:visited{color: var(--lightaccentcolor);}
 .hidden{
     display:none;
 }
@@ -116,13 +118,23 @@ header li:hover,
 
 .card-panel p{margin-top:0;}
 .card-panel:not(.fullarticle) p{margin:0;}
-.content:not(.fullarticle){
-    overflow-x:auto;
+.content{word-wrap: break-word;}
+.content pre{
+    overflow-x: auto;
+    padding: .5rem;
+    background: #eee;
+    border-radius: 5px;
 }
 .content img{
     display:block;
     width:80%;
-    margin: 0 auto;
+    margin: .5rem auto;
+    border-radius: 5px;
+}
+.content video{
+    width:100%;
+    margin:.5rem 0;padding:0;
+    border-radius: 5px;
 }
 .card-panel iframe{
     width:100%;
