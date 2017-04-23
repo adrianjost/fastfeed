@@ -7,6 +7,9 @@ Main-function: update_feeds()
 /*
 DATA TABLES -> info.txt
 */
+ignore_user_abort(true);
+set_time_limit(0);
+
 require("db.php");
 function update_feeds(){
     $feeds = get_feed_list();
@@ -31,7 +34,9 @@ function update_feeds(){
     foreach ($newfeeddata as $item) {
         unset($item["pubDate"]);
         save_feed_item($item);
-}}
+    }
+    cleanup_db();
+}
 
 function minimize($str){
     //remove all html tags except <br><p><a>
