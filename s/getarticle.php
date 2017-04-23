@@ -65,6 +65,8 @@ if ($result) {
 	} 
     //$content  = str_replace("http://","https://",$content);
     $content = lazyimg($content);
+    //add external url links that only has a hash at href
+    $content = preg_replace("/<a(.*?)href=[\"']#(.*?)[\"'](.*?)>/", "<a$1href=\"".$url."#$2\"$3>", $content);
     
     //make all links open in a new tab and add rel="noopener"
     $content = preg_replace("/<a(.*?)>/", "<a$1 target=\"_blank\" rel=\"noopener\">", $content);
