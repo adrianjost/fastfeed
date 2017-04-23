@@ -128,25 +128,23 @@ function loadarticle(t){
             }else{
                 var r = JSON.parse(r);
                 var s = JSON.parse(getData("content-"+r["id"]));
+                history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
                 if(r["status"]){
-                    console.log(s);
                     document.getElementById("fullcard").innerHTML = get_fullcard(s["content"],r["body"]);
-                    //window.location.hash = c["id"];
-                    history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
-                    document.getElementById("cards").classList.add('hidden');
-                    document.getElementById("fullcard").classList.remove('hidden');
-                    t.classList.remove('loading');
                     lazyimg(); 
-                    
+
                     s["fullcontent"] = r["body"];
                     saveData("content-"+r["id"], JSON.stringify(s));
                 }else{  // iFrame Fallback
                     var ifrm = document.createElement("iframe");
-                    ifrm.src = document.getElementById(r["id"]).getAttribute("url");
-                    console.log(ifrm);
-                    document.getElementById("fullcard").innerHTML = get_fullcard(s,ifrm);
-                    t.classList.remove('loading');
+                        ifrm.src = document.getElementById(r["id"]).getAttribute("url");
+                    var ifrmwrap = document.createElement("div");
+                        ifrmwrap.appendChild(ifrm);
+                    document.getElementById("fullcard").innerHTML = get_fullcard(s["content"],(ifrmwrap.innerHTML));
                 }
+                document.getElementById("cards").classList.add('hidden');
+                document.getElementById("fullcard").classList.remove('hidden');
+                t.classList.remove('loading');
                 lastid = r["id"];
                 window.scrollBy(0,-9999999999);
             }
