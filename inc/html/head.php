@@ -1,6 +1,6 @@
 <!DOCTYPE html><html>
 <head>
-    <meta name="theme-color" content="#00d9a3">
+    <meta name="theme-color" content="#00d49f">
     <title>FastFeed</title>
     <meta name="description" content="A beautiful and fast RSS-Reader">
     <meta name="author" content="Adrian Jost">
