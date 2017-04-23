@@ -47,9 +47,28 @@ function save_feed_item($data){
     db_query($sql);
 }
 
+function cleanup_db(){
+    global $db_prefix;
+    // keep only 100 articles per feed and delete all articles that are older than 1 week
+    // select all articleids to delete
+    $getsql = "SELECT articleid FROM ".$db_prefix."FEEDDATA s WHERE (
+            SELECT  COUNT(*) 
+            FROM    ".$db_prefix."FEEDDATA  f
+            WHERE f.feedid = s.feedid
+            	AND f.feedid > s.feedid
+        ) > 100 OR ((SELECT UNIX_TIMESTAMP(NOW()) - 604800) > s.cdate) ORDER BY s.feedid;";
+    $result = db_query($getsql);
+    //delete each article
+    while ($row = mysqli_fetch_assoc($result)){
+        $delsql = "DELETE FROM ".$db_prefix."FEEDDATA WHERE feedid = ".$row["feedid"].";";
+        db_query($delsql);
+    }
+    return true;    
+}
+
 function get_new_feeds($lastid){
     global $db_prefix;
-    $sql = "SELECT ".$db_prefix."FEEDDATA.*,".$db_prefix."FEEDS.iconurl  FROM ".$db_prefix."FEEDDATA, ".$db_prefix."FEEDS WHERE ".$db_prefix."FEEDDATA.articleid > ".$lastid." AND ".$db_prefix."FEEDDATA.feedid = ".$db_prefix."FEEDS.feedid;";
+    $sql = "SELECT ".$db_prefix."FEEDDATA.*,".$db_prefix."FEEDS.iconurl  FROM ".$db_prefix."FEEDDATA, ".$db_prefix."FEEDS WHERE ".$db_prefix."FEEDDATA.articleid > ".$lastid." AND ".$db_prefix."FEEDDATA.feedid = ".$db_prefix."FEEDS.feedid ORDER BY ".$db_prefix."FEEDDATA.articleid LIMIT 0 , 100;";
     $result = db_query($sql);
     $return = [];
     while ($row = mysqli_fetch_assoc($result)){
