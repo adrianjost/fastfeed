@@ -65,6 +65,9 @@ if ($result) {
 	} 
     //$content  = str_replace("http://","https://",$content);
     $content = lazyimg($content);
+    
+    //make all links open in a new tab and add rel="noopener"
+    $content = preg_replace("/<a(.*?)>/", "<a$1 target=\"_blank\" rel=\"noopener\">", $content);
 	//echo $content;
     echo json_encode([
         "status"=> true,
