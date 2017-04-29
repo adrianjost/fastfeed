@@ -63,7 +63,10 @@ if ($result) {
 		$tidy->cleanRepair();
 		$content = $tidy->value;
 	} 
+    //youtube,vimeo,viddler should use always https
     //$content  = str_replace("http://","https://",$content);
+    $content = preg_replace("/http\:\/\/(.*?)(youtube|vimeo|viddler)/", "https://$1$2", $content);
+    // prepare images for layzload
     $content = lazyimg($content);
     //add external url links that only has a hash at href
     $content = preg_replace("/<a(.*?)href=[\"']#(.*?)[\"'](.*?)>/", "<a$1href=\"".$url."#$2\"$3>", $content);
