@@ -15,7 +15,7 @@ function delData(a){"undefined"!=typeof Storage?localStorage.removeItem(a):docum
 function existData(a){return"undefined"!=typeof Storage?!(null===localStorage.getItem(a)):""!=getData(a)}
 
 //lazyloading images from articles
-function lazyimg(){var imgDefer=document.getElementsByTagName('img');for(var i=0;i<imgDefer.length;i++){if(imgDefer[i].getAttribute('data-src')){imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));}}}
+function lazyimg(){var imgDefer=document.getElementsByTagName('img');for(var i=0;i<imgDefer.length;i++){if(imgDefer[i].getAttribute('data-src')){imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));imgDefer[i].setAttribute('onerror','this.src=this.src.replace("https://","http://")');}}}
 /* --------------------------------------------------------
 	INITIALIZE
 ---------------------------------------------------------*/
