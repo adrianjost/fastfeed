@@ -34,11 +34,12 @@ if (function_exists('tidy_parse_string')) {
 	$tidy->cleanRepair();
 	$html = $tidy->value;
 }
-function lazyimg( $content ) { 
+function lazyHttpsImg( $content ) { 
     //if ( false !== strpos( $content, 'data-src' ) ) return $content; 
     $placeholder_image = ('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='); 
     //$content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img${1}src="%s" data-src="${2}"${3}>', $placeholder_image ), $content ); 
-    $content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="${2}">', $placeholder_image ), $content ); 
+    //$content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="${2}">', $placeholder_image ), $content ); 
+    $content = preg_replace( '#<img([^>]+?)src=[\'"]?https?:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="https://${2}">', $placeholder_image ), $content ); 
     return $content; } 
 // give it to Readability
 $readability = new Readability($html, $url);
@@ -63,8 +64,11 @@ if ($result) {
 		$tidy->cleanRepair();
 		$content = $tidy->value;
 	} 
+    //youtube,vimeo,viddler should use always https
     //$content  = str_replace("http://","https://",$content);
-    $content = lazyimg($content);
+    $content = preg_replace("/http\:\/\/(.*?)(youtube|vimeo|viddler)/", "https://$1$2", $content);
+    // prepare images for layzload
+    $content = lazyHttpsImg($content);
     //add external url links that only has a hash at href
     $content = preg_replace("/<a(.*?)href=[\"']#(.*?)[\"'](.*?)>/", "<a$1href=\"".$url."#$2\"$3>", $content);
     
