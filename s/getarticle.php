@@ -39,7 +39,8 @@ function lazyHttpsImg( $content ) {
     $placeholder_image = ('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='); 
     //$content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img${1}src="%s" data-src="${2}"${3}>', $placeholder_image ), $content ); 
     //$content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="${2}">', $placeholder_image ), $content ); 
-    $content = preg_replace( '#<img([^>]+?)src=[\'"]?https?:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="https://${2}">', $placeholder_image ), $content ); 
+    $content = preg_replace( '#<img([^>]+?)src=[\'"]?http:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<i style="color:#999">(image for security reasons removed ~FastFeed)</i>', $placeholder_image ), $content ); 
+    $content = preg_replace( '#<img([^>]+?)src=[\'"]?https:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="https://${2}">', $placeholder_image ), $content ); 
     return $content; } 
 // give it to Readability
 $readability = new Readability($html, $url);
