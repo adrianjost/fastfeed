@@ -7,3 +7,4 @@
         <a href="privacy.php">Privacy Policy</a>
     </div>
 </footer>
+<link href="inc/css/styles.css" rel="stylesheet">
