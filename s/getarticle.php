@@ -71,7 +71,8 @@ if ($result) {
     $content = lazyHttpsImg($content);
     //add external url links that only has a hash at href
     $content = preg_replace("/<a(.*?)href=[\"']#(.*?)[\"'](.*?)>/", "<a$1href=\"".$url."#$2\"$3>", $content);
-    
+    //fix table overflow -> wrap it
+    $content = preg_replace("/(<table[^>]*>(?:.|\n)*?<\/table>)/", "<div class=\"table-wrap\">$1</div>", $content);
     //make all links open in a new tab and add rel="noopener"
     $content = preg_replace("/<a(.*?)>/", "<a$1 target=\"_blank\" rel=\"noopener\">", $content);
 	//echo $content;
