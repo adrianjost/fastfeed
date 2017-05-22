@@ -182,7 +182,6 @@ function load_main(e){
     document.getElementById("aboutcard").classList.add("hidden");
     document.getElementById("contentwrapper").classList.remove("hidden");
     document.getElementById("settingscard").classList.add("hidden");
-    console.log("loadmain");
      if(window.location.hash.substr(1)&&window.location.hash!="#about"&&window.location.hash!="#settings"){
         closecard(e);
     }else{
