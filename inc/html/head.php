@@ -1,4 +1,4 @@
-<!DOCTYPE html><html>
+<!DOCTYPE html><html lang="de">
 <head>
     <meta name="theme-color" content="#00d49f">
     <title>FastFeed</title>
