@@ -1,7 +1,7 @@
 /* --------------------------------------------------------
 	OPTIONS
 ---------------------------------------------------------*/
-var max_cards = 100; //100
+var max_cards = 50; //50
 
 
 /* --------------------------------------------------------
@@ -26,13 +26,13 @@ var lastid = "";
 /* --------------------------------------------------------
 	CARDS
 ---------------------------------------------------------*/
-function get_card(id,content){return '<a class="card-panel hoverable" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
-function get_fullcard(content,a){return '<div class="card-panel hoverable"><div id="singleheadline" class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content">'+a+'</div></div>'}
+function get_card(id,content){return '<a class="card-panel" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
+function get_fullcard(content,a){return '<div class="card-panel"><div id="singleheadline" class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content">'+a+'</div></div>'}
 
 function cleanup_cards(){
-    var n = news;
+    let n = news;
     //delete old articles
-    var min_time = Math.round(new Date().getTime()/1000) - (7 * 86400);
+    const min_time = Math.round(new Date().getTime()/1000) - (7 * 86400);
     for (var i=0; i<n.length; i++) {
         var a = JSON.parse(getData("content-"+n[i]))
         if (parseInt(a["cdate"])<min_time){
@@ -62,7 +62,7 @@ function render_cards(min=0,max = max_cards){
     max = (max < news.length)?max:news.length;
     min = (min < news.length)?min:(((max-max_cards)>0)?(max-max_cards):0);
     out = "";
-    var n = news;
+    let n = news;
     n.sort(function(a,b){return b-a});
     for (i=min; i<max; i++){
         var a = JSON.parse(getData("content-"+n[i]))
@@ -71,7 +71,7 @@ function render_cards(min=0,max = max_cards){
     
     document.getElementById("fullcard").addEventListener("click",closecard);
     
-    var cards = document.getElementById("cards").getElementsByClassName("card-panel");
+    let cards = document.getElementById("cards").getElementsByClassName("card-panel");
 	for (var i=0; i<cards.length; i++) {
 		cards[i].addEventListener("click",opencard);
 	}
@@ -108,7 +108,7 @@ function opencard(e,t = this){
 function loadarticle(t){
     t.classList.add('loading');
     t.classList.remove('error');
-    var c = JSON.parse(getData("content-"+t.getAttribute("id")))
+    let c = JSON.parse(getData("content-"+t.getAttribute("id")))
     if(c["fullcontent"]){
         document.getElementById("fullcard").innerHTML = get_fullcard(c["content"],c["fullcontent"]);
         //window.location.hash = c["id"];
@@ -126,8 +126,8 @@ function loadarticle(t){
                 t.classList.remove('loading');
                 t.classList.add('error');
             }else{
-                var r = JSON.parse(r);
-                var s = JSON.parse(getData("content-"+r["id"]));
+                let r = JSON.parse(r);
+                let s = JSON.parse(getData("content-"+r["id"]));
                 history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
                 if(r["status"]){
                     document.getElementById("fullcard").innerHTML = get_fullcard(s["content"],r["body"]);
@@ -136,9 +136,9 @@ function loadarticle(t){
                     s["fullcontent"] = r["body"];
                     saveData("content-"+r["id"], JSON.stringify(s));
                 }else{  // iFrame Fallback
-                    var ifrm = document.createElement("iframe");
+                    let ifrm = document.createElement("iframe");
                         ifrm.src = document.getElementById(r["id"]).getAttribute("url");
-                    var ifrmwrap = document.createElement("div");
+                    let ifrmwrap = document.createElement("div");
                         ifrmwrap.appendChild(ifrm);
                     document.getElementById("fullcard").innerHTML = get_fullcard(s["content"],(ifrmwrap.innerHTML));
                 }
@@ -197,14 +197,15 @@ window.onload = function(){
     document.getElementById("about").addEventListener("click",load_about);
     document.getElementById("settings").addEventListener("click",load_settings);
     render_cards(0);
-    var last = Math.max(...news)
-    if(last==-Infinity){last=0;}
-    ajax("s/getfeedupdates.php?last="+last+"&uid="+userid,function(resp){
+    const last = Math.max(...news)
+    ajax("s/getfeedupdates.php?last="+((last==-Infinity)?0:last)+"&uid="+userid,function(resp){
         resp = JSON.parse(resp);
-        for (i=0; i<resp.length; i++){
-            add_card(resp[i]);
+        if(resp.length > 0){
+            for (i=0; i<resp.length; i++){
+                add_card(resp[i]);
+            }
+            cleanup_cards();
+            render_cards(0);
         }
-        cleanup_cards();
-        render_cards(0);
     });
 }
