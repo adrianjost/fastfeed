@@ -3,7 +3,6 @@
 ---------------------------------------------------------*/
 var max_cards = 50; //50
 
-
 /* --------------------------------------------------------
 	BASIC FUNCTIONS
 ---------------------------------------------------------*/
@@ -16,6 +15,11 @@ function existData(a){return"undefined"!=typeof Storage?!(null===localStorage.ge
 
 //lazyloading images from articles
 function lazyimg(){var imgDefer=document.getElementsByTagName('img');for(var i=0;i<imgDefer.length;i++){if(imgDefer[i].getAttribute('data-src')){imgDefer[i].setAttribute('src',imgDefer[i].getAttribute('data-src'));imgDefer[i].setAttribute('onerror','this.src=this.src.replace("https://","http://")');}}}
+
+//scroll positions
+function get_scroll_position(){return(window.pageYOffset||window.scrollTop||0)-(window.clientTop||0)}
+function save_scroll_position(o){const t=get_scroll_position();if(o){let s=JSON.parse(getData("content-"+o));s.scroll_position=t,saveData("content-"+o,JSON.stringify(s))}else saveData("scroll_position",t)}
+function set_last_scroll_position(o){if(o){const s=JSON.parse(getData("content-"+o));window.scrollTo(0,parseInt(s.scroll_position||0))}else window.scrollTo(0,parseInt(getData("scroll_position")))}
 /* --------------------------------------------------------
 	INITIALIZE
 ---------------------------------------------------------*/
@@ -113,10 +117,11 @@ function closecard(e){
         else{e.preventDefault();}
     }
     lastid = "";
+    save_scroll_position(window.location.hash.substr(1));
     document.getElementById("cards").classList.remove('hidden');
     document.getElementById("fullcard").classList.add('hidden');
-    document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
-    window.scrollBy(0,-70);
+    set_last_scroll_position();
+    //document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
     history.pushState('', document.title, window.location.pathname+window.location.search);
 }
 function opencard(e,t = this){
@@ -126,6 +131,7 @@ function opencard(e,t = this){
 function loadarticle(t){
     t.classList.add('loading');
     t.classList.remove('error');
+    save_scroll_position();
     let c = JSON.parse(getData("content-"+t.getAttribute("id")))
     if(c["fullcontent"]){
         document.getElementById("fullcard").innerHTML = get_fullcard(c["content"],c["fullcontent"]);
@@ -134,7 +140,7 @@ function loadarticle(t){
         history.pushState('', document.title, window.location.pathname+window.location.search+"#"+c["id"]);
         document.getElementById("cards").classList.add('hidden');
         document.getElementById("fullcard").classList.remove('hidden');
-        window.scrollBy(0,-9999999999);
+        set_last_scroll_position(c["id"]);
         t.classList.remove('loading');
         lazyimg();
         
@@ -164,7 +170,7 @@ function loadarticle(t){
                 document.getElementById("fullcard").classList.remove('hidden');
                 t.classList.remove('loading');
                 lastid = r["id"];
-                window.scrollBy(0,-9999999999);
+                set_last_scroll_position(r["id"]);
             }
         })
     }
@@ -185,6 +191,7 @@ function load_settings(e){
 ---------------------------------------------------------*/
 function load_about(e){
     if(e){e.preventDefault();}
+    console.log();
     document.getElementById("contentwrapper").classList.add("hidden");
     document.getElementById("settingscard").classList.add("hidden");
     document.getElementById("aboutcard").classList.remove("hidden");
