@@ -145,40 +145,55 @@
 /* FOOTER */
 #share{
     position:fixed;
+    z-index: 99;
     left:0; right:0;
     bottom:0;
     min-height: 1.5rem;
     background: #aaa;
     max-height:4rem;
+    font-size: 1.2rem
 }
 #share .btn{
     color: #fff !important;
     background: var(--primarycolor);
     display: inline-block;
-    padding: .75rem;
+    padding: .5rem 1.5rem;
     box-sizing: border-box;
     white-space:nowrap;
-    margin: 0 .25rem;
+    line-height:100%;
 }
-#share .btn:first-of-type{margin-left:0;}
-#share .btn:last-of-type{margin-right:0;}
-
 #share .social, #share .web{
     display: inline-block;
     vertical-align: middle;
-    padding: .5rem;
     box-sizing: border-box;
     white-space:nowrap;
 }
 #share .social{
-    width: 60%;
+    width: 70%;
     overflow-x: auto;
 }
+#share .social::-webkit-scrollbar {display: none}
+
+#share .social #tw{background-color:#409BE1}
+#share .social #gp{background-color:#CE3D2B}
+#share .social #fb{background-color:#29478a}
+#share .social #wa{background-color:#29CA3C}
+
+#share .social #tg{background-color:#32a4e0}
+#share .social #pt{background-color:#BD081C}
+#share .social #rd{background-color:#FF4500}
+#share .social #ma{background-color:#777}
+#share svg{
+    height:1em;
+    width:auto;
+    vertical-align:bottom;
+}
 #share .web{
-    width: 40%;
+    width: 30%;
 }
 #share .web .btn{
     width: 100%;
+    text-align: right;
     background: var(--accentcolor);
 }
 
