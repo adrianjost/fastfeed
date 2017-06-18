@@ -109,6 +109,12 @@ function render_cards(min=0,max = max_cards){
         load_about();
     }else if(window.location.hash=="#settings"){
         load_settings();
+    }else{
+        document.getElementById("aboutcard").classList.add("hidden");
+        document.getElementById("settingscard").classList.add("hidden");
+        document.getElementById("fullcard").classList.add('hidden');
+        document.getElementById("contentwrapper").classList.remove("hidden");
+        document.getElementById("cards").classList.remove('hidden');
     }
 }
 function closecard(e){
@@ -135,9 +141,9 @@ function loadarticle(t){
     let c = JSON.parse(getData("content-"+t.getAttribute("id")))
     if(c["fullcontent"]){
         document.getElementById("fullcard").innerHTML = get_fullcard(c["content"],c["fullcontent"]);
-        //window.location.hash = c["id"];
         lastid = c["id"];
-        history.pushState('', document.title, window.location.pathname+window.location.search+"#"+c["id"]);
+        //history.pushState('', document.title, window.location.pathname+window.location.search+"#"+c["id"]);
+        window.location.hash = lastid;
         document.getElementById("cards").classList.add('hidden');
         document.getElementById("fullcard").classList.remove('hidden');
         set_last_scroll_position(c["id"]);
@@ -152,7 +158,8 @@ function loadarticle(t){
             }else{
                 r = JSON.parse(rr);
                 let s = JSON.parse(getData("content-"+r["id"]));
-                history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
+                //history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
+                window.location.hash = r["id"];
                 if(r["status"]){
                     document.getElementById("fullcard").innerHTML = get_fullcard(s["content"],r["body"]);
                     lazyimg(); 
@@ -184,24 +191,27 @@ function load_settings(e){
     document.getElementById("aboutcard").classList.add("hidden");
     document.getElementById("settingscard").classList.remove("hidden");
     window.location.hash = "settings";
-    window.scrollBy(0,-70);
+    window.scrollTo(0,0);
 }
 /* --------------------------------------------------------
 	ABOUT
 ---------------------------------------------------------*/
 function load_about(e){
     if(e){e.preventDefault();}
-    console.log();
     document.getElementById("contentwrapper").classList.add("hidden");
     document.getElementById("settingscard").classList.add("hidden");
     document.getElementById("aboutcard").classList.remove("hidden");
     window.location.hash = "about";
-    window.scrollBy(0,-70);
+    window.scrollTo(0,0);
 }
 
 /* --------------------------------------------------------
 	MAIN
 ---------------------------------------------------------*/
+window.onhashchange = function(e){
+    render_cards();//window.location.hash
+}
+
 function load_main(e){
     if(e){e.preventDefault();}
     document.getElementById("aboutcard").classList.add("hidden");
@@ -211,6 +221,7 @@ function load_main(e){
         closecard(e);
     }else{
         window.location.hash = "#"+lastid;
+        set_last_scroll_position(lastid);
     }
     //history.pushState({}, '', document.getElementsByClassName("fullarticle")[0].getAttribute("id"));
     //document.getElementById(window.location.hash.substr(1)).scrollIntoView({  behavior:'smooth'});
