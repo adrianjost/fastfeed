@@ -177,7 +177,6 @@ function loadarticle(t){
                 document.getElementById("fullcard").classList.remove('hidden');
                 t.classList.remove('loading');
                 lastid = r["id"];
-                set_last_scroll_position(r["id"]);
             }
         })
     }
