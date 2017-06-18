@@ -99,22 +99,22 @@ function render_cards(min=0,max = max_cards){
 	}
     
     // open the article with id from hash (if it exist)
-    if(window.location.hash.substr(1)&&window.location.hash!="#about"&&window.location.hash!="#settings"){
+    if(window.location.hash.substr(1)){
+        if(window.location.hash=="#about"){load_about();return;}
+        if(window.location.hash=="#settings"){load_settings();return;}
+        
         if(news.indexOf(parseInt(window.location.hash.substr(1))) != -1){
             loadarticle(document.getElementById(window.location.hash.substr(1)));
         }else{
             history.pushState('', document.title, window.location.pathname+window.location.search);
         }
-    }else if(window.location.hash=="#about"){
-        load_about();
-    }else if(window.location.hash=="#settings"){
-        load_settings();
     }else{
         document.getElementById("aboutcard").classList.add("hidden");
         document.getElementById("settingscard").classList.add("hidden");
         document.getElementById("fullcard").classList.add('hidden');
         document.getElementById("contentwrapper").classList.remove("hidden");
         document.getElementById("cards").classList.remove('hidden');
+        set_last_scroll_position();
     }
 }
 function closecard(e){
@@ -190,6 +190,7 @@ function load_settings(e){
     document.getElementById("contentwrapper").classList.add("hidden");
     document.getElementById("aboutcard").classList.add("hidden");
     document.getElementById("settingscard").classList.remove("hidden");
+    set_last_scroll_position(window.location.hash);
     window.location.hash = "settings";
     window.scrollTo(0,0);
 }
@@ -201,6 +202,7 @@ function load_about(e){
     document.getElementById("contentwrapper").classList.add("hidden");
     document.getElementById("settingscard").classList.add("hidden");
     document.getElementById("aboutcard").classList.remove("hidden");
+    set_last_scroll_position(window.location.hash);
     window.location.hash = "about";
     window.scrollTo(0,0);
 }
