@@ -1,7 +1,7 @@
 "use strict";
 console.log("SW - executing.");
 var prefix = "sw-";
-var version = "v003";
+var version = "v006";
 var offlineFundamentals = [
 	"https://fastfeed.hackedit.de/", 
 	"/inc/css/styles.css", 

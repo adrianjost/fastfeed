@@ -2,12 +2,12 @@
 <body>
 <?php require("inc/html/header.php");?>
 
-<main>
+<main class="container">
     <div id="contentwrapper">
-        <section class="container" id="cards"></section>
-        <section class="container hidden" id="fullcard"></section>
+        <section id="cards"></section>
+        <section class="hidden" id="fullcard"></section>
     </div>
-    <section id="aboutcard" class="container hidden">
+    <section id="aboutcard" class="hidden">
         <div class="card-panel single-card fullarticle">
             <h2 class="title">About <i>Fast</i><b>Feed</b></h2>
             <div class="content">
@@ -18,7 +18,7 @@
             </div>
         </div>
     </section>
-    <section id="settingscard" class="container hidden">
+    <section id="settingscard" class="hidden">
         <div class="card-panel single-card fullarticle">
             <h2 class="title">Settings</h2>
             <div class="content">

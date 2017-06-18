@@ -6,7 +6,7 @@
 	margin: 5rem auto 1rem;
 	max-width: 800px;
 	width: 90%;
-    min-height:calc(100vh - (104px + 6rem));
+    min-height:calc(100vh - (104px + 5rem));
 }
 .single-card h2{
     text-align:center;
