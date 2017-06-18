@@ -27,7 +27,7 @@ var lastid = "";
 	CARDS
 ---------------------------------------------------------*/
 function get_card(id,content){return '<a class="card-panel" id="'+id+'" rel="nofollow" href="#'+id+'" url="'+content["url"]+'"><div class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content"><p>'+content["preview"]+'</p></div></a>'}
-function get_fullcard(content,a){return '<div class="card-panel"><div id="singleheadline" class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content">'+a+'</div></div>'}
+function get_fullcard(content,a){return '<div class="card-panel"><div id="singleheadline" class="headline"><img class="favicon" src="'+content["iconurl"]+'"></img><h2 class="title">'+content["title"]+'</h2></div><div class="content">'+a+'</div><div id="share"><div class="social"><a href="'+content["url"]+'"class="btn">FB</a><a href="'+content["url"]+'"class="btn">FB</a><a href="'+content["url"]+'"class="btn">FB</a><a href="'+content["url"]+'"class="btn">FB</a><a href="'+content["url"]+'"class="btn">FB</a><a href="'+content["url"]+'"class="btn">FB</a><a href="'+content["url"]+'"class="btn">FB</a></div><div class="web"><a href="'+content["url"]+'"class="btn">WEB</a></div></div></div>'}
 
 function cleanup_cards(){
     let n = news;
@@ -121,12 +121,12 @@ function loadarticle(t){
         lazyimg();
         
     }else{
-        ajax("s/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(r){
-            if(!r){
+        ajax("s/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(rr){
+            if(!rr){
                 t.classList.remove('loading');
                 t.classList.add('error');
             }else{
-                let r = JSON.parse(r);
+                r = JSON.parse(rr);
                 let s = JSON.parse(getData("content-"+r["id"]));
                 history.pushState('', document.title, window.location.pathname+window.location.search+"#"+r["id"]);
                 if(r["status"]){
