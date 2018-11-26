@@ -3,7 +3,7 @@
     <meta name="theme-color" content="#00d49f">
     <title>FastFeed</title>
     
-    <script defer src="inc/js/script.js?d=<?php echo time(); ?>"></script>
+    <script defer src="inc/js/script.js?v=004"></script>
     <script type="text/javascript">/* ========== SERVICE-WORKER ========== */
      "serviceWorker"in navigator?(console.log("SW (C) - registration in progress."),navigator.serviceWorker.register("/sw.js",{scope:'./'}).then(function(){console.log("SW (C) - registration complete.")},function(){console.log("SW (C) - registration failure.")})):console.log("SW (C) - not supported.");</script>
 
