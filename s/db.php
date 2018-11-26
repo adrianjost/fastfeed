@@ -68,7 +68,7 @@ function cleanup_db(){
 
 function get_new_feeds($lastid){
     global $db_prefix;
-    $sql = "SELECT ".$db_prefix."FEEDDATA.*,".$db_prefix."FEEDS.iconurl  FROM ".$db_prefix."FEEDDATA, ".$db_prefix."FEEDS WHERE ".$db_prefix."FEEDDATA.articleid > ".$lastid." AND ".$db_prefix."FEEDDATA.feedid = ".$db_prefix."FEEDS.feedid ORDER BY ".$db_prefix."FEEDDATA.articleid DESC LIMIT 0 , 100;";
+    $sql = "SELECT ".$db_prefix."FEEDDATA.*,".$db_prefix."FEEDS.iconurl  FROM ".$db_prefix."FEEDDATA, ".$db_prefix."FEEDS WHERE ".$db_prefix."FEEDDATA.articleid > ".$lastid." AND ".$db_prefix."FEEDDATA.feedid = ".$db_prefix."FEEDS.feedid ORDER BY ".$db_prefix."FEEDDATA.articleid DESC LIMIT 0 , 50;";
     $result = db_query($sql);
     $return = [];
     while ($row = mysqli_fetch_assoc($result)){

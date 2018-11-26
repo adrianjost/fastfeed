@@ -8,7 +8,7 @@ Main-function: update_feeds()
 DATA TABLES -> info.txt
 */
 ignore_user_abort(true);
-set_time_limit(0);
+//set_time_limit(0);
 
 require("db.php");
 function update_feeds(){

@@ -1,69 +1,4 @@
-:root {
-  --primarycolor: #00d49f;
-  --accentcolor: #fac532;
-  --lightaccentcolor: #ff9800;
-  --errorcolor: #ff0040;
-}
-
-html,body {
-    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Arial, sans-serif;
-    font-weight: normal;
-    color: #333;
-    margin:0;
-    padding:0;
-    position:relative;
-    width:100%;
-}
-
-a{
-    color: var(--accentcolor);
-    text-decoration:none;
-}
 #fullcard a:visited{color: var(--lightaccentcolor);}
-.hidden{
-    display:none;
-}
-/* HEADER */
-
-header{
-    position:fixed;
-    z-index:999;
-    top:0;left:0;right:0;
-    display:block;
-    background-color: var(--primarycolor);
-    font-size: 1.5rem;
-    color:#fff;
-    box-shadow: 0 0 4px rgba(0,0,0,.14), 0 4px 8px rgba(0,0,0,.28);
-}
-header .nav-wrapper{
-    max-width:850px;
-    margin:0 auto;
-}
-header a{
-    color:inherit;
-}
-
-header .brand-logo{
-    display:inline-block;
-    padding: 1rem; 
-}
-header ul{
-    display:inline-block;
-    float:right;
-    margin:0;
-    padding:0;
-}
-header li{
-    display:inline-block;
-    padding: 1rem; 
-    background-color: var(--primarycolor);
-    transition: background-color .3s ease-in-out;
-}
-header li:hover,
-:target{
-    background-color: var(--accentcolor);
-}
-
 
 /* CARDS */
 
@@ -71,7 +6,7 @@ header li:hover,
 	margin: 5rem auto 1rem;
 	max-width: 800px;
 	width: 90%;
-    min-height:calc(100vh - (104px + 6rem));
+    min-height:calc(100vh - (104px + 5rem));
 }
 .single-card h2{
     text-align:center;
@@ -88,13 +23,6 @@ header li:hover,
 	border-radius: 2px;
 	background-color: #fff;
 	box-shadow: 0 2px 2px 0 rgba(0, 0, 0, 0.14), 0 1px 5px 0 rgba(0, 0, 0, 0.12), 0 3px 1px -2px rgba(0, 0, 0, 0.2);
-}
-.hoverable {
-  transition: box-shadow .25s;
-  box-shadow: 0;
-}
-.hoverable:hover {
-  box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
 /* card content */
@@ -215,18 +143,58 @@ header li:hover,
 }
 
 /* FOOTER */
-footer {
-    color: #000;
-    text-align: center;
-    padding: 20px 20px;
+#share{
+    position:fixed;
+    z-index: 99;
+    left:0; right:0;
+    bottom:0;
+    min-height: 1.5rem;
+    background: #aaa;
+    max-height:4rem;
+    font-size: 1.2rem
 }
-footer .copyright {
-    color: #999;
+#share .btn{
+    color: #fff !important;
+    background: var(--primarycolor);
+    display: inline-block;
+    padding: .5rem 1.5rem;
+    box-sizing: border-box;
+    white-space:nowrap;
+    line-height:100%;
 }
-footer .infos a {
-    color: #999;
-    text-decoration: underline;
-    font-size: .7rem;
+#share .social, #share .web{
+    display: inline-block;
+    vertical-align: middle;
+    box-sizing: border-box;
+    white-space:nowrap;
+}
+#share .social{
+    width: 70%;
+    overflow-x: auto;
+}
+#share .social::-webkit-scrollbar {display: none}
+
+#share .social #tw{background-color:#409BE1}
+#share .social #gp{background-color:#CE3D2B}
+#share .social #fb{background-color:#29478a}
+#share .social #wa{background-color:#29CA3C}
+
+#share .social #tg{background-color:#32a4e0}
+#share .social #pt{background-color:#BD081C}
+#share .social #rd{background-color:#FF4500}
+#share .social #ma{background-color:#777}
+#share svg{
+    height:1em;
+    width:auto;
+    vertical-align:bottom;
+}
+#share .web{
+    width: 30%;
+}
+#share .web .btn{
+    width: 100%;
+    text-align: right;
+    background: var(--accentcolor);
 }
 
 @media only screen 
@@ -237,12 +205,6 @@ footer .infos a {
     }
     .card-panel{
         padding:1rem;
-    }
-	header{
-        font-size: 1.2rem;
-    }
-    header .brand-logo, header li{
-        padding:.75rem;
     }
     .headline{
         padding:0;
