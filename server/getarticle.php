@@ -2,6 +2,9 @@
 // !!! is working as it is - no changes here!!!
 require_once 'inc/Readability.php';
 header('Content-Type: application/json; charset=utf-8');
+header("Access-Control-Allow-Origin: *");
+
+require("config.php");
 
 // get latest Medialens alert 
 // (change this URL to whatever you'd like to test)
@@ -41,7 +44,7 @@ function lazyHttpsImg( $content ) {
     //$content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="${2}">', $placeholder_image ), $content ); 
     //$content = preg_replace( '#<img([^>]+?)src=[\'"]?http:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<i style="color:#999">(image for security reasons removed ~FastFeed)</i>', $placeholder_image ), $content ); 
     $content = preg_replace( '#<img([^>]+?)src=[\'"]?https:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img src="%s" data-src="https://${2}">', $placeholder_image ), $content ); 
-    $content = preg_replace( '#<img([^>]+?)src=[\'"]?http:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', '<img src="'.$placeholder_image.'" data-src="https://fastfeed.hackedit.de/s/imgproxy.php?u=http://${2}">', $content ); 
+    $content = preg_replace( '#<img([^>]+?)src=[\'"]?http:\/\/([^\'"\s>]+)[\'"]?([^>]*)>#', '<img src="'.$placeholder_image.'" data-src="https://'.$server_host.'/imgproxy.php?u=http://${2}">', $content ); 
     return $content; } 
 // give it to Readability
 $readability = new Readability($html, $url);

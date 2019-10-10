@@ -3,9 +3,9 @@ console.log("SW - executing.");
 var prefix = "sw-";
 var version = "v004";
 var offlineFundamentals = [
-	"https://fastfeed.hackedit.de/", 
-	"/inc/css/styles.css", 
-	"/inc/js/script.js", 
+	"https://fastfeed.adrianjost.dev/",
+	"/inc/css/styles.css",
+	"/inc/js/script.js",
 	"manifest.json"
 ];
 

@@ -1,1 +1,2 @@
-s/config.php
+dist
+server/config.php

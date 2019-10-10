@@ -151,9 +151,8 @@ function loadarticle(t){
         set_last_scroll_position(c["id"]);
         t.classList.remove('loading');
         lazyimg();
-        
     }else{
-        ajax("s/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(rr){
+        ajax("https://fastfeed.hackedit.de/server/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(rr){
             if(!rr){
                 t.classList.remove('loading');
                 t.classList.add('error');
@@ -271,7 +270,7 @@ window.addEventListener("load", () => {
     document.getElementById("settings").addEventListener("click",load_settings);
     render_cards(0);
     const last = Math.max(...news)
-    ajax("s/getfeedupdates.php?last="+((last==-Infinity)?0:last)+"&uid="+userid,function(resp){
+    ajax("https://fastfeed.hackedit.de/server/getfeedupdates.php?last="+((last==-Infinity)?0:last)+"&uid="+userid,function(resp){
         resp = JSON.parse(resp);
         if(resp.length > 0){
             for (i=0; i<resp.length; i++){
