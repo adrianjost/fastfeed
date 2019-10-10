@@ -8,9 +8,9 @@ e.g. "#1 database is missing" for https://github.com/adrianjost/fastfeed/issues/
 ## Client Setup
 
 1. Adjust the Server Path at `inc/js/script.js:274`
-1. Adjust the Service Worker Path at `sw.js:6` to the frontend deplyoment url
-1. run `sh ./build.sh`
-1. deploy the `./dist/client` directory
+2. Adjust the Service Worker Path at `sw.js:6` to the frontend deplyoment url
+3. run `sh ./build.sh`
+4. deploy the `./dist/client` directory
 
 
 ## Server Setup
@@ -23,7 +23,8 @@ e.g. "#1 database is missing" for https://github.com/adrianjost/fastfeed/issues/
   $db_user = "..." ;
   $db_pw = "...";
   $db_name = "..." ;
+  $server_host = "...";
 ?>
 ```
-1. run `sh ./build.sh`
-1. deploy the `./dist/server` directory
+2. run `sh ./build.sh`
+3. deploy the `./dist/server` directory

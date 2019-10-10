@@ -1,4 +1,5 @@
 <?php
+header("Access-Control-Allow-Origin: *");
 if(isset($_GET['u'])){
     $url = $_GET['u'];
     $parsedUrl = parse_url($url);

@@ -151,9 +151,8 @@ function loadarticle(t){
         set_last_scroll_position(c["id"]);
         t.classList.remove('loading');
         lazyimg();
-        
     }else{
-        ajax("server/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(rr){
+        ajax("https://fastfeed.hackedit.de/server/getarticle.php?id="+t.getAttribute("id")+"&url="+encodeURIComponent(t.getAttribute("url")),function(rr){
             if(!rr){
                 t.classList.remove('loading');
                 t.classList.add('error');

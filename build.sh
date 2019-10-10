@@ -13,6 +13,9 @@ mkdir -p "./dist/client"
 # generate page
 php index.php > "./dist/client/index.html"
 
+# copy service worker
+cp -R sw.js ./dist/client
+
 # copy assets
 cp -R inc ./dist/client/inc
 
