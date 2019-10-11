@@ -1,12 +1,10 @@
 "use strict";
 console.log("SW - executing.");
 var prefix = "sw-";
-var version = "v004";
+var version = "v005";
 var offlineFundamentals = [
-	"https://fastfeed.adrianjost.dev/",
-	"/inc/css/styles.css",
-	"/inc/js/script.js",
-	"manifest.json"
+	process.env.ROOT_URL,
+	"manifest.webmanifest"
 ];
 
 self.addEventListener("install",event => {
