@@ -4,47 +4,47 @@
   "name": "FastFeed RRS Reader",
   "icons": [
     {
-      "src": "img/favicon/36.png",
+      "src": "inc/img/favicon/36.png",
       "sizes": "36x36",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/48.png",
+      "src": "inc/img/favicon/48.png",
       "sizes": "48x48",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/72.png",
+      "src": "inc/img/favicon/72.png",
       "sizes": "72x72",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/96.png",
+      "src": "inc/img/favicon/96.png",
       "sizes": "96x96",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/120.png",
+      "src": "inc/img/favicon/120.png",
       "sizes": "120x120",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/144.png",
+      "src": "inc/img/favicon/144.png",
       "sizes": "144x144",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/180.png",
+      "src": "inc/img/favicon/180.png",
       "sizes": "180x180",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/192.png",
+      "src": "inc/img/favicon/192.png",
       "sizes": "192x192",
       "type": "image/png"
     },
     {
-      "src": "img/favicon/512.png",
+      "src": "inc/img/favicon/512.png",
       "sizes": "512x512",
       "type": "image/png"
     }

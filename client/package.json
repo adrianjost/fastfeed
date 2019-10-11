@@ -1,0 +1,29 @@
+{
+  "name": "fastfeed",
+  "version": "1.0.0",
+  "description": "A network speed optimized newsreader.",
+  "main": "index.html",
+  "dependencies": {},
+  "devDependencies": {
+    "@babel/core": "^7.6.4",
+    "@babel/preset-env": "^7.6.3",
+    "autoprefixer": "^9.6.4",
+    "parcel-bundler": "^1.12.4",
+    "postcss-modules": "^1.4.1",
+    "posthtml-include": "^1.3.0"
+  },
+  "scripts": {
+    "dev": "parcel serve index.html --port 3000",
+    "build": "parcel build index.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/adrianjost/fastfeed.git"
+  },
+  "author": "Adrian Jost",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/adrianjost/fastfeed/issues"
+  },
+  "homepage": "https://github.com/adrianjost/fastfeed#readme"
+}

@@ -37,7 +37,8 @@ if (function_exists('tidy_parse_string')) {
 	$tidy->cleanRepair();
 	$html = $tidy->value;
 }
-function lazyHttpsImg( $content ) { 
+function lazyHttpsImg( $content ) {
+    $server_host = $_SERVER['SERVER_NAME'] . dirname($_SERVER['REQUEST_URI']);
     //if ( false !== strpos( $content, 'data-src' ) ) return $content; 
     $placeholder_image = ('data:image/png;base64,R0lGODlhAQABAAD/ACwAAAAAAQABAAACADs='); 
     //$content = preg_replace( '#<img([^>]+?)src=[\'"]?([^\'"\s>]+)[\'"]?([^>]*)>#', sprintf( '<img${1}src="%s" data-src="${2}"${3}>', $placeholder_image ), $content ); 

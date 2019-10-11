@@ -1,30 +1,29 @@
 # <i>Fast</i><b>Feed</b>
 A beautiful fast RSS-Reader with modern Webtechnology to improve mobile use on realy slow networks
 
-## How to name your branch
-#(id of the issue) + title of the issue </br>
-e.g. "#1 database is missing" for https://github.com/adrianjost/fastfeed/issues/1
+## /client
 
-## Client Setup
+`cd ./client`
 
-1. Adjust the Server Path at `inc/js/script.js:274`
-2. Adjust the Service Worker Path at `sw.js:6` to the frontend deplyoment url
-3. run `sh ./build.sh`
-4. deploy the `./dist/client` directory
+- Setup: `npm i`
+- Development: `npm run dev`
+- Build: `npm run build`
+  - before running the command, set the following env variables:
+    - `API_URL=https://fastfeed.hackedit.de/server`
+  - build output is located at `/dist`
 
-
-## Server Setup
+## /server
 
 1. create a file at `./server/config.php` and put in your credentials:
 ```php
-<?php 
+<?php
   $db_prefix = "...";
   $db_host = "...";
   $db_user = "..." ;
   $db_pw = "...";
   $db_name = "..." ;
-  $server_host = "...";
 ?>
 ```
-2. run `sh ./build.sh`
-3. deploy the `./dist/server` directory
+2. deploy the `./server` directory
+
+Note: An example database sql file is located at /server/database
