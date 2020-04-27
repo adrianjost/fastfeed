@@ -1,5 +1,10 @@
 # <i>Fast</i><b>Feed</b>
+
 A beautiful fast RSS-Reader with modern Webtechnology to improve mobile use on realy slow networks
+
+[![Dependabot Status](https://api.dependabot.com/badges/status?host=github&repo=adrianjost/fastfeed)](https://dependabot.com)
+[![Dependency Status](https://david-dm.org/adrianjost/fastfeed.svg)](https://david-dm.org/adrianjost/fastfeed)
+[![Dependency Status](https://david-dm.org/adrianjost/fastfeed/dev-status.svg)](https://david-dm.org/adrianjost/fastfeed?type=dev)
 
 ## /client
 
