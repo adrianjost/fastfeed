@@ -526,7 +526,7 @@ class Readability
 		* into P tags where they have been used inappropriately (as in, where they contain no other block level elements.)
 		*
 		* Note: Assignment from index for performance. See http://www.peachpit.com/articles/article.aspx?p=31567&seqNum=5
-		* TODO: Shouldn't this be a reverse traversal?
+		* TODO [$5ec6743ebd71f00007db146d]: Shouldn't this be a reverse traversal?
 		**/
 		$node = null;
 		$nodesToScore = array();
@@ -574,7 +574,7 @@ class Readability
 				else
 				{
 					/* EXPERIMENTAL */
-					// TODO: change these p elements back to text nodes after processing
+					// TODO [$5ec6743ebd71f00007db146e]: change these p elements back to text nodes after processing
 					for ($i = 0, $il = $node->childNodes->length; $i < $il; $i++) {
 						$childNode = $node->childNodes->item($i);
 						if ($childNode->nodeType == 3) { // XML_TEXT_NODE
@@ -792,7 +792,7 @@ class Readability
 		**/
 		if (strlen($this->getInnerText($articleContent, false)) < 250)
 		{
-			// TODO: find out why element disappears sometimes, e.g. for this URL http://www.businessinsider.com/6-hedge-fund-etfs-for-average-investors-2011-7
+			// TODO [$5ec6743ebd71f00007db146f]: find out why element disappears sometimes, e.g. for this URL http://www.businessinsider.com/6-hedge-fund-etfs-for-average-investors-2011-7
 			// in the meantime, we check and create an empty element if it's not there.
 			if (!isset($this->body->childNodes)) $this->body = $this->dom->createElement('body');
 			$this->body->innerHTML = $this->bodyCache;
@@ -1008,7 +1008,7 @@ class Readability
 		* Gather counts for other typical elements embedded within.
 		* Traverse backwards so we can remove nodes at the same time without effecting the traversal.
 		*
-		* TODO: Consider taking into account original contentScore here.
+		* TODO [$5ec6743ebd71f00007db1470]: Consider taking into account original contentScore here.
 		*/
 		for ($i=$curTagsLength-1; $i >= 0; $i--) {
 			$weight = $this->getClassWeight($tagsList->item($i));
