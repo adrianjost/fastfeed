@@ -1,0 +1,10 @@
+version: 2
+updates:
+- package-ecosystem: npm
+  directory: "/client"
+  schedule:
+    interval: monthly
+    time: "01:00"
+    timezone: Europe/Berlin
+  open-pull-requests-limit: 99
+  versioning-strategy: increase-if-necessary
